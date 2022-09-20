@@ -27,7 +27,27 @@ jobs:
   ## Add CodeQL Scanning here before we build docker image
   ##
   ##
-  
+  sourcecode-scanning:
+    name: Scan source code with CodeQL 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        language: ['csharp']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Initial CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{matrix.language}}"
 
   containerized:
     name: Build Docket Image 
