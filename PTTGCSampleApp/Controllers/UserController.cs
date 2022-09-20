@@ -54,8 +54,8 @@ namespace PTTGCSampleApp.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] UserProfile User)
         {
-            // Bad Code 
-            // User.Password = GeneratePassword();
+            Bad Code 
+            User.Password = GeneratePassword();
 
             UserProfile inserted = _repository.InsertUser(User);
             return new OkObjectResult(inserted);
